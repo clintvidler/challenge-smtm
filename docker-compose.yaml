@@ -1,0 +1,44 @@
+services:
+  ng:
+    container_name: smtm-ng
+    build:
+      context: ./ng
+      dockerfile: Dockerfile
+    ports:
+      - "8080:4200"
+    restart: always
+    volumes:
+      - ./ng:/app
+      - /app/node_modules
+    command: ng serve --host 0.0.0.0
+    depends_on:
+      - go
+    networks:
+      - smtm_net
+
+  go:
+    container_name: smtm-go
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    ports:
+      - 8081:9090
+    restart: always
+    volumes:
+      - ./go:/app
+    depends_on:
+      - xero
+    networks:
+      - smtm_net
+
+  xero:
+    container_name: smtm-xero
+    image: jaypeng2015/show-me-the-money
+    ports:
+      - 8082:3000
+    networks:
+      - smtm_net
+
+networks:
+  smtm_net:
+    name: smtm_net

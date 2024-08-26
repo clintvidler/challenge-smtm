@@ -1,0 +1,36 @@
+<table>
+  <ng-container *ngFor="let row of rows()">
+    @if (row.RowType === "Header") {
+    <thead>
+      <tr>
+        <th *ngFor="let cell of row.Cells">
+          {{ cell.Value }}
+        </th>
+      </tr>
+    </thead>
+    } @else {
+    <tbody>
+      @if (!row.Rows?.length) {
+      <tr>
+        <th colspan="3">{{ row.Title }}</th>
+      </tr>
+      }@else {
+      <tr *ngIf="row.Title">
+        <th colspan="3">{{ row.Title }}</th>
+      </tr>
+      <tr *ngFor="let innerRow of row.Rows; let i = index">
+        <td
+          *ngFor="let cell of innerRow.Cells"
+          [ngStyle]="{
+            background: i + 1 === row.Rows?.length ? 'azure' : 'unset'
+          }"
+          [id]="cell.Attributes?.[0]?.Id + '-' + cell.Attributes?.[0]?.Value"
+        >
+          {{ cell.Value }}
+        </td>
+      </tr>
+      }
+    </tbody>
+    }
+  </ng-container>
+</table>

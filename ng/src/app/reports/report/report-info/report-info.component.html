@@ -1,0 +1,11 @@
+<h2>{{ name() || "No title" }}</h2>
+<ul>
+  <li *ngIf="id()"><strong>ID:</strong> {{ id() }}</li>
+  <li *ngIf="type()"><strong>Type:</strong> {{ type() }}</li>
+  <li *ngIf="titles()"><strong>Titles:</strong> {{ titles() }}</li>
+  <li *ngIf="created()"><strong>Created on:</strong> {{ created() }}</li>
+  <li *ngIf="updated() !== created()">
+    <strong>Updated on:</strong> {{ updated() }}
+  </li>
+  <li *ngIf="fields()">{{ fields() }}</li>
+</ul>

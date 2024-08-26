@@ -1,0 +1,7 @@
+<h1>Reports</h1>
+<!-- check if 'reports' is null, undefined, or [] -->
+@if (reports && reports.length) {
+<app-report *ngFor="let report of reports" [report]="report"></app-report>
+} @else {
+<p>There aren't any reports...</p>
+}

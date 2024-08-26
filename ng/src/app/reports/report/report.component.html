@@ -1,0 +1,20 @@
+<div [id]="'report-' + reportID()">
+  <!-- report info -->
+  <app-report-info
+    [name]="reportName()"
+    [id]="reportID()"
+    [type]="reportType()"
+    [titles]="reportTitles()"
+    [created]="reportCreated()"
+    [updated]="reportUpdated()"
+    [fields]="reportFields()"
+  ></app-report-info>
+
+  <!-- report table contents -->
+  <!-- check if 'rows' is null, undefined, or [] -->
+  @if (reportRows() && reportRows().length){
+  <app-report-rows [rows]="reportRows()"></app-report-rows>
+  } @else {
+  <p>The report is empty...</p>
+  }
+</div>
